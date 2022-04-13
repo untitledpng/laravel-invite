@@ -1,0 +1,27 @@
+{
+  "name": "untitledpng/laravel-invite",
+  "authors": [
+    {
+      "name": "UNTITLED_PNG",
+      "email": "info@untitledcode.nl"
+    }
+  ],
+  "require": {
+    "php": "8.*",
+    "laravel/framework": ">=9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Untitledpng\\LaravelInvite\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Untitledpng\\LaravelInvite\\ServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable" : true
+}
