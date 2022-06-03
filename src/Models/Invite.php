@@ -87,6 +87,10 @@ class Invite extends Model
      */
     public function getExpiresInAttribute(): string
     {
+        if (null === $this->valid_until) {
+            return '-';
+        }
+
         if ($this->valid_until->diffInHours(now()) === 0) {
             return $this->valid_until->diffInMinutes(now()) . ' minutes';
         }
