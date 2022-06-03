@@ -2,11 +2,11 @@
 
 namespace Untitledpng\LaravelInvite\Services;
 
-use App\Models\User;
-use Flashpoint\ShopByLook\Models\Invite;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\User;
 use Untitledpng\LaravelInvite\Contracts\Repositories\InviteRepositoryContract;
 use Untitledpng\LaravelInvite\Contracts\Services\InviteServiceContract;
+use Untitledpng\LaravelInvite\Models\Invite;
 
 class InviteService implements InviteServiceContract
 {
@@ -26,7 +26,7 @@ class InviteService implements InviteServiceContract
     public function createInvite(User $user, bool $expires = true): Invite
     {
         $invite = new Invite([
-            'created_by_user_id' => $user->id,
+            'created_by_user_id' => $user->getAttribute('id'),
             'code' => Str::uuid(),
             'valid_until' => $expires
                 ? now()->hours(config('invite.invite_hours_valid'))->toDateTimeString()
@@ -61,7 +61,7 @@ class InviteService implements InviteServiceContract
      */
     public function useInvite(User $newUser, Invite $invite): void
     {
-        $invite->used_by_user_id = $newUser->id;
+        $invite->used_by_user_id = $newUser->getAttribute('id');
         $invite->is_used = true;
         $invite->save();
     }

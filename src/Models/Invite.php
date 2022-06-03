@@ -1,10 +1,10 @@
 <?php
 
-namespace Flashpoint\ShopByLook\Models;
+namespace Untitledpng\LaravelInvite\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Carbon;
 
 /**

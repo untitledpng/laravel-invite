@@ -2,7 +2,8 @@
 
 namespace Untitledpng\LaravelInvite\Contracts\Services;
 
-use Flashpoint\ShopByLook\Models\Invite;
+use Untitledpng\LaravelInvite\Models\Invite;
+use Illuminate\Foundation\Auth\User;
 
 interface InviteServiceContract
 {

@@ -2,10 +2,10 @@
 
 namespace Untitledpng\LaravelInvite\Repositories;
 
-use App\Models\User;
-use Flashpoint\ShopByLook\Models\Invite;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Auth\User;
 use Untitledpng\LaravelInvite\Contracts\Repositories\InviteRepositoryContract;
+use Untitledpng\LaravelInvite\Models\Invite;
 
 class InviteRepository implements InviteRepositoryContract
 {
@@ -26,7 +26,7 @@ class InviteRepository implements InviteRepositoryContract
         return Invite::query()
             ->where(
                 'created_by_user_id',
-                $user->id
+                $user->getAttribute('id')
             )->where(
                 static function ($query) {
                     $query->whereNull('valid_until')

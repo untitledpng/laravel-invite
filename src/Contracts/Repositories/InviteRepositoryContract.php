@@ -2,8 +2,9 @@
 
 namespace Untitledpng\LaravelInvite\Contracts\Repositories;
 
-use Flashpoint\ShopByLook\Models\Invite;
 use Illuminate\Database\Eloquent\Collection;
+use Untitledpng\LaravelInvite\Models\Invite;
+use Illuminate\Foundation\Auth\User;
 
 interface InviteRepositoryContract
 {
