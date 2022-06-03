@@ -2,6 +2,8 @@
 
 namespace Untitledpng\LaravelInvite\Services;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\User;
 use Untitledpng\LaravelInvite\Contracts\Repositories\InviteRepositoryContract;
@@ -34,6 +36,30 @@ class InviteService implements InviteServiceContract
         ]);
 
         return tap($invite)->save();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAllInvitesByUser(User $user): Collection
+    {
+        return Invite::query(
+            //
+        )->where(
+            'created_by_user_id',
+            $user->getAttribute('id')
+        )->where(
+            static function (Builder $query) {
+                $query->where(
+                    'valid_until',
+                    '>=',
+                    now()->addMinute()->toDateTimeString()
+                )->orWhere(
+                    'is_used',
+                    true
+                );
+            }
+        )->get();
     }
 
     /**

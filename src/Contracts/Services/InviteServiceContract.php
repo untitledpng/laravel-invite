@@ -2,6 +2,7 @@
 
 namespace Untitledpng\LaravelInvite\Contracts\Services;
 
+use Illuminate\Support\Collection;
 use Untitledpng\LaravelInvite\Models\Invite;
 use Illuminate\Foundation\Auth\User;
 
@@ -16,6 +17,15 @@ interface InviteServiceContract
      * @return Invite
      */
     public function createInvite(User $user, bool $expires = true): Invite;
+
+    /**
+     * Get all used and active invites for the
+     * given user.
+     *
+     * @param  User $user
+     * @return Collection<Int, User>
+     */
+    public function getAllInvitesByUser(User $user): Collection;
 
     /**
      * Validate the given invite for use.
