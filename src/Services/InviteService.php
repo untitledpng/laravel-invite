@@ -31,7 +31,7 @@ class InviteService implements InviteServiceContract
             'created_by_user_id' => $user->getAttribute('id'),
             'code' => Str::uuid(),
             'valid_until' => $expires
-                ? now()->hours(config('invite.invite_hours_valid'))->toDateTimeString()
+                ? now()->addHours(config('invite.invite_hours_valid'))->toDateTimeString()
                 : null,
         ]);
 

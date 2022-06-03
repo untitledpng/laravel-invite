@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon;
  *
  * Attributes
  * @property bool $isUsed
+ * @property string $expiresIn
  */
 class Invite extends Model
 {
@@ -56,6 +57,7 @@ class Invite extends Model
      */
     protected $appends = [
         'isUsed',
+        'expiresIn',
     ];
 
     /**
@@ -75,6 +77,20 @@ class Invite extends Model
      */
     public function getIsUsedAttribute(): bool
     {
-        return null === $this->used_by_user_id;
+        return null !== $this->used_by_user_id;
+    }
+
+    /**
+     * Get the expires in a formatted string.
+     *
+     * @return string
+     */
+    public function getExpiresInAttribute(): string
+    {
+        if ($this->valid_until->diffInHours(now()) === 0) {
+            return $this->valid_until->diffInMinutes(now()) . ' minutes';
+        }
+
+        return $this->valid_until->diffInHours(now()) . ' hours';
     }
 }
