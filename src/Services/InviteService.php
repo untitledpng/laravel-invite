@@ -28,8 +28,7 @@ class InviteService implements InviteServiceContract
     public function createInvite(User $user, bool $expires = true): Invite
     {
         $invite = new Invite([
-            'created_by_user_identifier' => $user->getAuthIdentifier(),
-            'created_by_name' => $user->getAttribute('name'),
+            'created_by_local_user_id' => $user->localUser()->id,
             'code' => Str::uuid(),
             'valid_until' => $expires
                 ? now()->addHours(config('invite.invite_hours_valid'))->toDateTimeString()
@@ -47,8 +46,8 @@ class InviteService implements InviteServiceContract
         return Invite::query(
             //
         )->where(
-            'created_by_user_identifier',
-            $user->getAuthIdentifier()
+            'created_by_local_user_id',
+            $user->localUser()->id
         )->where(
             static function (Builder $query) {
                 $query->where(
@@ -88,8 +87,7 @@ class InviteService implements InviteServiceContract
      */
     public function useInvite(User $newUser, Invite $invite): void
     {
-        $invite->used_by_user_identifier = $newUser->getAuthIdentifier();
-        $invite->used_by_name = $newUser->getAttribute('name');
+        $invite->used_by_local_user_id = $newUser->localUser()->id;
         $invite->is_used = true;
         $invite->save();
     }
