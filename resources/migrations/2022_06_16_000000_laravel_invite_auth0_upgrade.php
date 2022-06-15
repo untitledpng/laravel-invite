@@ -15,17 +15,15 @@ return new class extends Migration {
         Schema::dropIfExists('user_invites');
         Schema::create('user_invites', static function (Blueprint $table) {
             $table->id();
-            $table->string('created_by_user_identifier')->nullable();
-            $table->string('used_by_user_identifier')->nullable();
-            $table->string('created_by_name')->nullable();
-            $table->string('used_by_name')->nullable();
+            $table->foreignId('created_by_local_user_id')->nullable()->constrained('local_users')->cascadeOnDelete();
+            $table->foreignId('used_by_local_user_id')->nullable()->constrained('local_users')->cascadeOnDelete();
             $table->uuid('code');
             $table->boolean('is_used')->default(false);
             $table->dateTime('valid_until')->nullable();
             $table->timestamps();
 
             $table->index(['code']);
-            $table->index(['created_by_user_identifier', 'valid_until']);
+            $table->index(['created_by_local_user_id', 'valid_until']);
         });
     }
 

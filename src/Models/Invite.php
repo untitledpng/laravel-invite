@@ -9,10 +9,8 @@ use Illuminate\Support\Carbon;
  * Class Invite
  *
  * @property int $id
- * @property null|string $created_by_user_identifier
- * @property null|string $used_by_user_identifier
- * @property null|string $created_by_name
- * @property null|string $used_by_name
+ * @property null|int $created_by_local_user_id
+ * @property null|int $used_by_local_user_id
  * @property string $code
  * @property bool $is_used
  * @property null|Carbon $valid_until
@@ -34,8 +32,8 @@ class Invite extends Model
      * @inheritDoc
      */
     protected $fillable = [
-        'created_by_user_identifier',
-        'used_by_user_identifier',
+        'created_by_local_user_id',
+        'used_by_local_user_id',
         'created_by_name',
         'used_by_name',
         'code',
@@ -66,7 +64,7 @@ class Invite extends Model
      */
     public function getIsUsedAttribute(): bool
     {
-        return null !== $this->used_by_user_identifier;
+        return null !== $this->used_by_local_user_id;
     }
 
     /**
