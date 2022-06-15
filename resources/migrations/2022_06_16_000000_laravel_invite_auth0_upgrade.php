@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->index(['code']);
-            $table->index(['created_by_user_id', 'valid_until']);
+            $table->index(['created_by_user_identifier', 'valid_until']);
         });
     }
 
