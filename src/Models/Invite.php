@@ -3,24 +3,21 @@
 namespace Untitledpng\LaravelInvite\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Carbon;
 
 /**
  * Class Invite
  *
  * @property int $id
- * @property null|int $created_by_user_id
- * @property null|int $used_by_user_id
+ * @property null|string $created_by_user_identifier
+ * @property null|string $used_by_user_identifier
+ * @property null|string $created_by_name
+ * @property null|string $used_by_name
  * @property string $code
  * @property bool $is_used
  * @property null|Carbon $valid_until
  * @property Carbon $created_at
  * @property Carbon $updated_at
- *
- * Relations
- * @property User $usedBy
  *
  * Attributes
  * @property bool $isUsed
@@ -37,8 +34,10 @@ class Invite extends Model
      * @inheritDoc
      */
     protected $fillable = [
-        'created_by_user_id',
-        'used_by_user_id',
+        'created_by_user_identifier',
+        'used_by_user_identifier',
+        'created_by_name',
+        'used_by_name',
         'code',
         'valid_until',
     ];
@@ -61,23 +60,13 @@ class Invite extends Model
     ];
 
     /**
-     * Get the user that has used the invite.
-     *
-     * @return BelongsTo
-     */
-    public function usedBy(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'used_by_user_id');
-    }
-
-    /**
      * This indicates if the invite has been used.
      *
      * @return bool
      */
     public function getIsUsedAttribute(): bool
     {
-        return null !== $this->used_by_user_id;
+        return null !== $this->used_by_user_identifier;
     }
 
     /**

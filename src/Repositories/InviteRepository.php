@@ -25,8 +25,8 @@ class InviteRepository implements InviteRepositoryContract
     {
         return Invite::query()
             ->where(
-                'created_by_user_id',
-                $user->getAttribute('id')
+                'created_by_user_identifier',
+                $user->getAuthIdentifier()
             )->where(
                 static function ($query) {
                     $query->whereNull('valid_until')
