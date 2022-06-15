@@ -3,7 +3,7 @@
 namespace Untitledpng\LaravelInvite\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Foundation\Auth\User;
+use Auth0\Laravel\Contract\Model\Stateful\User;
 use Untitledpng\LaravelInvite\Contracts\Repositories\InviteRepositoryContract;
 use Untitledpng\LaravelInvite\Models\Invite;
 

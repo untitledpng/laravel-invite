@@ -4,7 +4,7 @@ namespace Untitledpng\LaravelInvite\Contracts\Services;
 
 use Illuminate\Support\Collection;
 use Untitledpng\LaravelInvite\Models\Invite;
-use Illuminate\Foundation\Auth\User;
+use Auth0\Laravel\Contract\Model\Stateful\User;
 
 interface InviteServiceContract
 {

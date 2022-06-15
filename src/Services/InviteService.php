@@ -5,7 +5,7 @@ namespace Untitledpng\LaravelInvite\Services;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Illuminate\Foundation\Auth\User;
+use Auth0\Laravel\Contract\Model\Stateful\User;
 use Untitledpng\LaravelInvite\Contracts\Repositories\InviteRepositoryContract;
 use Untitledpng\LaravelInvite\Contracts\Services\InviteServiceContract;
 use Untitledpng\LaravelInvite\Models\Invite;
