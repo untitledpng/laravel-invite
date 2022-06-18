@@ -85,9 +85,9 @@ class InviteService implements InviteServiceContract
     /**
      * @inheritDoc
      */
-    public function useInvite(User $newUser, Invite $invite): void
+    public function useInvite($newUser, Invite $invite): void
     {
-        $invite->used_by_local_user_id = $newUser->localUser()->id;
+        $invite->used_by_local_user_id = $newUser->id;
         $invite->is_used = true;
         $invite->save();
     }
