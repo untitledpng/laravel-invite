@@ -2,7 +2,9 @@
 
 namespace Untitledpng\LaravelInvite\Models;
 
+use App\Models\Auth0\LocalUser;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
@@ -20,6 +22,9 @@ use Illuminate\Support\Carbon;
  * Attributes
  * @property bool $isUsed
  * @property string $expiresIn
+ *
+ * Relations
+ * @property LocalUser $usedBy
  */
 class Invite extends Model
 {
@@ -65,6 +70,14 @@ class Invite extends Model
     public function getIsUsedAttribute(): bool
     {
         return null !== $this->used_by_local_user_id;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function usedBy(): BelongsTo
+    {
+        return $this->belongsTo(LocalUser::class, 'used_by_local_user_id', 'id');
     }
 
     /**
